@@ -3,6 +3,7 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
+    background-color: #fafafa
 }
 
 /* LINKS */
@@ -126,9 +127,76 @@ a:hover {
 
 /* UPLOAD PAGE */
 .column {
-    flex: 1;
+    flex-grow: 1;
     background-color: white;
     min-height: 300px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
+}
+
+
+/* SIGNUP PAGE */
+.signInContainer {
+    box-sizing: border-box;
+    background-color: efefee;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signInContainer .column {
+    flex-grow: 0.5;
+    width: 450px;
+    padding: 20px 35px;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.signInContainer .column .header {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.signInContainer .column .header img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.signInContainer .column .header span {
+    font-size: 14px;
+}
+
+.signInContainer .column .loginForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signInContainer .column .loginForm form input[type="text"],
+.signInContainer .column .loginForm form input[type="email"],
+.signInContainer .column .loginForm form input[type="password"] {
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 5px 10px;
+    border: none;
+    border-bottom: 1px solid #dedede;
+}
+
+.signInContainer .column .loginForm form input[type="submit"] {
+    background: purple;
+    color: white;
+    width: 100px;
+    border: none;
+    border-radius: 3px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center; 
 }

@@ -1,4 +1,34 @@
-<?php require_once("includes/config.php"); ?>
+<?php 
+require_once("includes/config.php");
+require_once("includes/classes/FormSanitizer.php");
+require_once("includes/classes/Account.php");
+require_once("includes/classes/Constants.php");
+
+$account = new Account($con);
+
+if(isset($_POST["signInButton"])) {
+
+    $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
+    $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
+
+    $wasSuccessful = $account->login($username, $password);
+
+    if($wasSuccessful) {
+        $_SESSION["userLoggedIn"] = $username;
+        header("Location: index.php");
+        
+    }
+    
+
+
+}
+
+function getInputValue($name) {
+    if(isset($_POST[$name])) {
+        echo $_POST[$name];
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +45,22 @@
         <div class="column">
 
             <div class=header>
-
+                <img src="assets/images/icons/logo_black.png" alt="One Stage Black Logo" title="One Stage">
+                <h3>Sign In</h3>
+                <span>to fully enjoy One Stage!</span>
             </div>
 
             <div class="loginForm">
-            
+                <form action="signIn.php" method="POST">
+                <?php echo $account->getError(Constants::$loginFailed);?>
+                    <input type="text" name="username" placeholder="Username" value="<?php getInputValue('username'); ?>" autocomplete="off" required>
+                    <input type="password" name="password" placeholder="Password" autocomplete="off" required>
+                    <input type="submit" name="signInButton" value="Sign In">
+                </form>
             </div>
 
-            <a class="signInMessage" href="signIn.php">
-                Already have an account? sign in here!
+            <a class="signInMessage" href="signUp.php">
+                Need an account? Sign un here!
             </a>
 
         </div>
