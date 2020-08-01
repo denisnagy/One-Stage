@@ -76,10 +76,68 @@ class Video {
         $this->sqlData["views"] = $this->sqlData["views"] + 1;
     }
 
+    // Get likes values from database
     public function getLikes() {
-        return 5;
+        $query = $this->con->prepare("SELECT count(*) as 'count' FROM likes WHERE videoId = :videoId");
+        $query->bindParam(":videoId", $videoId);
+        $videoId = $this->getId();
+        $query->execute();
+
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        return $data["count"];
     }
 
+    // Get dislikes values from database
+    public function getDislikes() {
+        $query = $this->con->prepare("SELECT count(*) as 'count' FROM dislikes WHERE videoId = :videoId");
+        $query->bindParam(":videoId", $videoId);
+        $videoId = $this->getId();
+        $query->execute();
+
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        return $data["count"];
+    }
+
+    // Like the video function
+    public function like() {
+        
+        $id = $this->getId();
+
+        $query = $this->con->prepare("SELECT * FROM likes WHERE username=:username AND videoId=:videoId");
+        $query->bindParam(":username", $username);
+        $query->bindParam(":videoId", $id);
+
+        $username = $this->userLoggedInObj->getUsername();
+        $query->execute();
+
+        if($query->rowCount() > 0) {
+            // Remove like from database when liked button clicked again
+            $query = $this->con->prepare("DELETE FROM likes WHERE username=:username AND videoId=:videoId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $id);
+            $query->execute();
+
+            $result = array(
+                "likes" => -1,
+                "dislikes" => 0
+            );
+
+            return json_encode($result);
+        }
+        else {
+            // Remove from DISLIKES table
+            $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username AND videoId=:videoId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $id);
+            $query->execute();
+
+            // Insert like into LIKES table
+            $query = $this->con->prepare("INSERT INTO likes(username, videoId) VALUES(:username, :videoId)");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $id);
+            $query->execute();
+        }
+    }
 
 }
 ?>
