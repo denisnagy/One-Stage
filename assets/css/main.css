@@ -201,6 +201,8 @@ a:hover {
     text-align: center; 
 }
 
+
+/* WATCH VIDEO PAGE */
 .watchLeftColumn {
     flex: 1;
 
@@ -208,7 +210,29 @@ a:hover {
 
 .watchLeftColumn .videoPlayer {
     width: 100%;
-    
+}
+
+.watchLeftColumn .videoInfo {
+    width: 100%;
+    padding: 20px 0 8px 0;
+}
+
+.watchLeftColumn .videoInfo h1 {
+    display: block;
+    overflow: hidden;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.watchLeftColumn .detailsSection {
+    display: flex;
+}
+
+.watchLeftColumn .detailsSection .viewCount {
+    color: rgba(17, 17, 17, 0.6);
+    font-size: 16px;
+    flex: 1;
 }
 
 .sugestionsColumn {
@@ -217,3 +241,4 @@ a:hover {
     height: 100%;
     padding-left: 24px;
 }
+
