@@ -14,7 +14,7 @@
         $likeButton = $this->createLikeButton();
         $dislikeButton = $this->createDislikeButton();
         
-        return "<div>
+        return "<div class='controls'>
                     $likeButton
                     $dislikeButton
                 </div>";
@@ -27,7 +27,11 @@
         $action = "likeVideo(this, $videoId)";
         $class = "likeButton";
 
-        $imageSrc = "assets/images/icons/thumbsUpFull.png";
+        $imageSrc = "assets/images/icons/thumbsUp.png";
+
+        if($this->video->wasLikedBy()) {
+            $imageSrc = "assets/images/icons/thumbsUpFull.png";
+        }
 
         return ButtonProvider::createButton($text, $imageSrc, $action, $class);
     }
@@ -39,7 +43,11 @@
         $action = "dislikeVideo(this, $videoId)";
         $class = "dislikeButton";
 
-        $imageSrc = "assets/images/icons/thumbsDownFull.png";
+        $imageSrc = "assets/images/icons/thumbsDown.png";
+
+        if($this->video->wasDislikedBy()) {
+            $imageSrc = "assets/images/icons/thumbsDownFull.png";
+        }
 
         return ButtonProvider::createButton($text, $imageSrc, $action, $class);
     }

@@ -17,3 +17,7 @@ $(document).ready(function() {
     });
 
 }); 
+
+function notSignedIn() {
+    alert("Sign in to like or dislike this content!");
+}

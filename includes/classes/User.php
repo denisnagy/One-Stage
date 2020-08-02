@@ -14,8 +14,12 @@ class User {
 
     }
 
+    public static function isLoggedIn() {
+        return isset($_SESSION["userLoggedIn"]);
+    }
+
     public function getUsername() {
-        return $this->sqlData["username"];
+        return $this->sqlData["username"] ?? "";
     }
 
     public function getName() {
@@ -36,6 +40,27 @@ class User {
 
     public function getSignUpDate() {
         return $this->sqlData["signUpDate"];
+    }
+
+    // Check see if the user is following a user
+    public function isFollowing($userTo) {
+        $query = $this->con->prepare("SELECT * FROM followers WHERE userTo=:userTo AND userFrom=:userFrom");
+        $query->bindParam(":userTo", $userTo);
+        $query->bindParam(":userFrom", $username);
+        $username = $this->getUsername();
+
+        $query->execute();
+        return $query->rowCount() > 0;
+    }
+
+    // Get the numbers of followers from the database
+    public function getFollowersCount() {
+        $query = $this->con->prepare("SELECT * FROM followers WHERE userTo=:userTo");
+        $query->bindParam(":userTo", $username);
+        $username = $this->getUsername();
+
+        $query->execute();
+        return $query->rowCount();
     }
 }
 ?>

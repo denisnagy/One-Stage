@@ -32,7 +32,39 @@ class VideoInfo {
     }
 
     private function createSecondaryInfo() {
+
+        $description = $this->video->getDescription();
+        $uploadDate = $this->video->getUploadDate();
+        $uploadedBy = $this->video->getUploadedBy();
+        $profileButton = ButtonProvider::createUserProfileButton($this->con, $uploadedBy);
+
+        // Subscribe button show if the user is not logged in
+        if($uploadedBy == $this->userLoggedInObj->getUsername()) {
+            $actionButton = ButtonProvider::createEditVideoButton($this->video->getId());
+        }
+        else {
+            $userToObject = new User($this->con, $uploadedBy);
+            $actionButton = ButtonProvider::createFollowerButton($this->con, $userToObject, $this->userLoggedInObj);
+        }
         
+        return "<div class='secondaryInfo'>
+                    <div class='topRow'>
+                        $profileButton
+
+                        <div class='uploadInfo'>
+                            <span class='owner'>
+                                <a href='profile.php?username=$uploadedBy'>$uploadedBy</a>
+                            </span>
+                            <span class='date'>Published on $uploadDate</span>
+                        </div>
+                        $actionButton
+                    </div>
+
+                    <div class='descriptionContainer'>
+                        $description
+                    </div>
+
+                </div>";
     }
 }
 ?>
