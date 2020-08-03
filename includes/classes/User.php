@@ -35,7 +35,7 @@ class User {
     }
 
     public function getProfilePic() {
-        return $this->sqlData["profilePic"];
+        return $this->sqlData["profilePic"] ?? "assets/images/profilePictures/default.png";
     }
 
     public function getSignUpDate() {

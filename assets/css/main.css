@@ -1,8 +1,9 @@
 html,
 body {
     height: 100%;
+    max-width: 1200px;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     background-color: #fafafa
 }
 
@@ -345,4 +346,45 @@ a:hover {
     font-size: 14px;
     font-weight: 500;
     color: black;
+}
+
+.commentSection .header {
+    margin-top: 24px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.commentSection .header .commentForm .profilePicture {
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+    border-radius: 50%;
+}
+
+.commentSection .header .commentCount {
+    margin-bottom: 24px;
+}
+
+.commentSection .header .commentForm {
+    display: flex;
+}
+
+.commentSection .header .commentForm textarea {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #111;
+    resize: none;
+}
+
+.commentSection .header .commentForm .postComment {
+    height: 36px;
+    background-color: slateblue;
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 0 15px;
+    border-radius: 2px;
 }
