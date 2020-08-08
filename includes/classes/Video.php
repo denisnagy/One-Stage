@@ -220,7 +220,7 @@ class Video {
 
         $query->execute();
 
-        return $query->rowCount();
+        return $query->rowCount() . " Comments";
     }
 }
 ?>
