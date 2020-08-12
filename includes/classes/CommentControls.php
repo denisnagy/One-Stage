@@ -1,8 +1,8 @@
-<?php 
-    require_once("ButtonProvider.php");
-    class VideoInfoControls {
+<?php
+require_once("ButtonProvider.php"); 
+class CommentControls {
 
-        private $con, $comment, $userLoggedInObj;
+    private $con, $comment, $userLoggedInObj;
 
     public function __construct($con, $comment, $userLoggedInObj) {
         $this->con = $con;
@@ -11,7 +11,7 @@
     }
 
     public function create() {
-
+        
         $replyButton = $this->createReplyButton();
         $likesCount = $this->createLikesCount();
         $likeButton = $this->createLikeButton();
@@ -23,10 +23,10 @@
                     $likesCount
                     $likeButton
                     $dislikeButton
-                </div>";
+                </div>
+                $replySection";
     }
 
-    // Create reply button for comments
     private function createReplyButton() {
         $text = "REPLY";
         $action = "toggleReply(this)";
@@ -34,7 +34,6 @@
         return ButtonProvider::createButton($text, null, $action, null);
     }
 
-    // Create the likes counting function for comments
     private function createLikesCount() {
         $text = $this->comment->getLikes();
 
@@ -43,43 +42,55 @@
         return "<span class='likesCount'>$text</span>";
     }
 
-    // Create the reply to comments section 
     private function createReplySection() {
-        return "";
+        $postedBy = $this->userLoggedInObj->getUsername();
+        $videoId = $this->comment->getVideoId();
+        $commentId = $this->comment->getId();
+
+        $profileButton = ButtonProvider::createUserProfileButton($this->con, $postedBy);
+        
+        $cancelButtonAction = "toggleReply(this)";
+        $cancelButton = ButtonProvider::createButton("Cancel", null, $cancelButtonAction, "cancelComment");
+
+        $postButtonAction = "postComment(this, \"$postedBy\", $videoId, $commentId, \"repliesSection\")";
+        $postButton = ButtonProvider::createButton("Reply", null, $postButtonAction, "postComment");
+
+        return "<div class='commentForm hidden'>
+                    $profileButton
+                    <textarea class='commentBodyClass' placeholder='Add a public comment'></textarea>
+                    $cancelButton
+                    $postButton
+                </div>";
     }
 
-    // Create the like button functionality
     private function createLikeButton() {
-
         $commentId = $this->comment->getId();
         $videoId = $this->comment->getVideoId();
         $action = "likeComment($commentId, this, $videoId)";
         $class = "likeButton";
 
-        $imageSrc = "assets/images/icons/thumbsUp.png";
+        $imageSrc = "assets/images/icons/thumb-up.png";
 
-        if($this->comment->commentWasLike()) {
-            $imageSrc = "assets/images/icons/thumbsUpFull.png";
+        if($this->comment->wasLikedBy()) {
+            $imageSrc = "assets/images/icons/thumb-up-active.png";
         }
 
         return ButtonProvider::createButton("", $imageSrc, $action, $class);
     }
 
-    private function createDislikebutton() {
-
+    private function createDislikeButton() {
         $commentId = $this->comment->getId();
         $videoId = $this->comment->getVideoId();
         $action = "dislikeComment($commentId, this, $videoId)";
         $class = "dislikeButton";
 
-        $imageSrc = "assets/images/icons/thumbsDown.png";
+        $imageSrc = "assets/images/icons/thumb-down.png";
 
         if($this->comment->wasDislikedBy()) {
-            $imageSrc = "assets/images/icons/thumbsDownFull.png";
+            $imageSrc = "assets/images/icons/thumb-down-active.png";
         }
 
         return ButtonProvider::createButton("", $imageSrc, $action, $class);
     }
-
-    }
+}
 ?>
