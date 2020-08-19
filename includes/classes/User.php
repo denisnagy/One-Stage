@@ -62,5 +62,20 @@ class User {
         $query->execute();
         return $query->rowCount();
     }
+
+    // Get following users for userLoggedIn
+    public function getFollowing() {
+        $query = $this->con->prepare("SELECT userTo FROM followers WHERE userFrom=:userFrom");
+        $username = $this->getUsername();
+        $query->bindParam(":userFrom", $username);
+        $query->execute();
+
+        $followers = array();
+        while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $user = new User($this->con, $row["userTo"]);
+            array_push($followers, $user);
+        }
+        return $followers;
+    }
 }
 ?>

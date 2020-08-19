@@ -1,10 +1,8 @@
 html,
 body {
     height: 100%;
-    max-width: 1200px;
     padding: 0;
-    margin: 0 auto;
-    background-color: #fafafa
+    background-color: #fafafa;
 }
 
 /* LINKS */
@@ -44,7 +42,6 @@ a:hover {
     margin-left: 8px;
 }
 
-
 #sideNavContainer {
     width: 240px;
     background-color: #f5f5f5;
@@ -76,7 +73,7 @@ a:hover {
 
 /* BUTTONS */
 #mastHeadContainer button:not(.searchButton), 
-#mastHeadContainer button .rightMenu img {
+#mastHeadContainer button .rightMenu a img {
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -89,6 +86,23 @@ a:hover {
 #mastHeadContainer button .rightMenu {
     height: 100%;
 }
+
+#mastHeadContainer .rightMenu img {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: none;
+    background-color: transparent;
+}
+
+.signInLink {
+    color: violet;
+    margin-left: 15px;
+    font-weight: 500;
+}
+
 
 
 
@@ -127,6 +141,48 @@ a:hover {
     border-bottom-right-radius: 2px;
 }
 
+
+/* Navigation */
+#sideNavContainer .navigationItems {
+    overflow-y: auto;
+    padding-top: 20px;
+}
+
+#sideNavContainer .navigationItem {
+    height: 40px;
+    display: flex;
+}
+
+#sideNavContainer .navigationItem img {
+    height: 18px;
+    margin-right: 27px;
+}
+
+#sideNavContainer .navigationItem span {
+    flex: 1;
+    color: #111;
+    font-size: 14px;
+}
+
+#sideNavContainer .navigationItem a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+}
+
+#sideNavContainer .navigationItem a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#sideNavContainer .heading {
+    color: rgba(17, 17, 17, 0.6);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px 0;
+    border-top: 1px solid #ededed;
+    display: block;
+}
 
 /* UPLOAD PAGE */
 .column {
@@ -208,7 +264,6 @@ a:hover {
 /* WATCH VIDEO PAGE */
 .watchLeftColumn {
     flex: 1;
-
 }
 
 .watchLeftColumn .videoPlayer {
@@ -239,7 +294,7 @@ a:hover {
 }
 
 .sugestionsColumn {
-    max-width: 425px;
+    max-width: 240px;
     flex-grow: 1;
     height: 100%;
     padding-left: 24px;
@@ -503,4 +558,95 @@ a:hover {
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
+}
+
+.videoGrid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sugestionsColumn .videoGridItem {
+    display: flex;
+    height: auto;
+}
+
+.videoGridItem {
+    height: 200px;
+    margin-right: 4px;
+    margin-bottom: 24px;
+}
+
+.videoGridItem .thumbnail {
+    width: 210px;
+    height: 118px;
+    position: relative;
+}
+
+.sugestionsColumn .videoGridItem .thumbnail {
+    margin-right: 8px;
+}
+
+.videoGridItem .thumbnail img {
+    width: 100%;
+    height: 100%;
+}
+
+.videoGridItem .thumbnail .duration {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin: 4px;
+    color: white;
+    background-color: rgba(17, 17, 17, 0.6);
+    opacity: 0.8;
+    padding: 2px 4px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+}
+
+.videoGridItem .details {
+    padding-right: 24px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 210px;
+}
+
+.sugestionsColumn .videoGridItem .details {
+    padding-right: 0;
+    flex: 1;
+}
+
+.videoGridItem .details .title {
+    margin: 8px 0;
+    max-height: 32px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #212529;
+}
+
+.videoGridItem .details .username,
+.videoGridItem .details .stats {
+    color: rgba(17, 17, 17, 0.6);
+    font-size: 13px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.videoGridHeader {
+    display: flex;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.videoGridHeader div {
+    flex: 1;
 }

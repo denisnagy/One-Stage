@@ -1,7 +1,12 @@
 <?php 
 require_once("includes/config.php");
+require_once("includes/classes/ButtonProvider.php");
 require_once("includes/classes/User.php");
 require_once("includes/classes/Video.php");
+require_once("includes/classes/VideoGrid.php");
+require_once("includes/classes/VideoGridItem.php");
+require_once("includes/classes/FollowersProvider.php");
+require_once("includes/classes/NavigationMenuProvider.php");
 
 // If session is set assign to variable, else var is empty
 $usernameLoggedIn = User::isLoggedIn() ? $_SESSION["userLoggedIn"] : "";
@@ -48,15 +53,18 @@ $userLoggedInObj = new User($con, $usernameLoggedIn);
                     <img class="upload" src="assets/images/icons/upload.png" alt="">
                 </a>
 
-                <a href="#">
-                    <img class="" src="assets/images/profilePictures/default.png" alt="">
-                </a>
+                <?php
+                    echo ButtonProvider::createUserProfileNavigationButton($con, $userLoggedInObj->getUsername());
+                ?>
             </div>
 
         </div>
 
         <div id="sideNavContainer" style="display:none;">
-        
+            <?php 
+            $navigationProvider = new NavigationMenuProvider($con, $userLoggedInObj);
+            echo $navigationProvider->create();
+            ?>
         </div>
 
         <div id="mainSectionContainer">

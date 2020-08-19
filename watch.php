@@ -20,23 +20,24 @@ $video->incrementViews();
 
 <div class="watchLeftColumn">
 
-<?php 
-    $videoPlayer = new VideoPlayer($video);
-    echo $videoPlayer->create(true);
+    <?php 
+        $videoPlayer = new VideoPlayer($video);
+        echo $videoPlayer->create(true);
 
-    $videoInfo = new VideoInfo($con, $video, $userLoggedInObj);
-    echo $videoInfo->create();
+        $videoInfo = new VideoInfo($con, $video, $userLoggedInObj);
+        echo $videoInfo->create();
 
-    $commentSection = new CommentSection($con, $video, $userLoggedInObj);
-    echo $commentSection->create();
-?>
+        $commentSection = new CommentSection($con, $video, $userLoggedInObj);
+        echo $commentSection->create();
+    ?>
 
 </div>
 
 <div class="sugestionsColumn">
-    <div class="">
-    
-    </div>
+    <?php 
+    $videoGrid = new VideoGrid($con, $userLoggedInObj);
+    echo $videoGrid->create(null, null, false);
+    ?>
 </div>
 
 

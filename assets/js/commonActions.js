@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    
     $(".navShowHide").on("click", function() {
         
         var main = $("#mainSectionContainer");
@@ -16,8 +16,8 @@ $(document).ready(function() {
 
     });
 
-}); 
+});
 
 function notSignedIn() {
-    alert("Sign in to like or dislike this content!");
+    alert("You must be signed in to perform this action");
 }

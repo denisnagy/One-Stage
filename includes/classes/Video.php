@@ -52,6 +52,11 @@ class Video {
         return date("M j, Y", strtotime($date));
     }
 
+    public function timeStamp() {
+        $date = $this->sqlData["uploadDate"];
+        return date("M jS, Y", strtotime($date));
+    }
+
     public function getViews() {
         return $this->sqlData["views"];
     }
@@ -217,6 +222,16 @@ class Video {
         }
 
         return $comments;
+    }
+
+    // Get thumbnail for video sugestions
+    public function getThumbnail() {
+        $query = $this->con->prepare("SELECT filepath FROM thumbnails WHERE videoId=:videoId AND selected=1");
+        $query->bindParam(":videoId", $videoId);
+        $videoId = $this->getId();
+        $query->execute();
+
+        return $query->fetchColumn();
     }
 
 }
