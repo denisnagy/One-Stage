@@ -26,6 +26,9 @@ class Constants {
 
     // Login Failed error message
     public static $loginFailed = "The username or password is incorrect.";
+
+    // Update password error message
+    public static $incorrectPassword = "The password you have entered in not valid";
     
 }
 ?>

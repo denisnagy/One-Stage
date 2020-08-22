@@ -9,13 +9,20 @@ class NavigationMenuProvider {
     }
 
     public function create() {
+        // Generate links in the side navigation panel
         $menuHtml = $this->createNavItem("Home", "assets/images/icons/home.png", "index.php");
         $menuHtml .= $this->createNavItem("Trending", "assets/images/icons/trending.png", "trending.php");
-        $menuHtml .= $this->createNavItem("Live", "assets/images/icons/home.png", "index.php");
+        $menuHtml .= $this->createNavItem("Latest News", "assets/images/icons/news.png", "news.php");
+        $menuHtml .= $this->createNavItem("Events", "assets/images/icons/events.png", "events.php");
+        $menuHtml .= $this->createNavItem("Live Performances", "assets/images/icons/home.png", "live.php");
+        $menuHtml .= $this->createNavItem("Stand-Up Comedy", "assets/images/icons/comedy.png", "standup.php");
+        $menuHtml .= $this->createNavItem("Theatre Plays", "assets/images/icons/theatre.png", "theatre.php");
+        
+        
 
         // only show if user is logged in
         if(User::isLoggedIn()) {
-            
+            $menuHtml .= $this->createNavItem("Upload Video", "assets/images/icons/upload.png", "upload.php");
             $menuHtml .= $this->createNavItem("Following", "assets/images/icons/following.png", "following.php");
             $menuHtml .= $this->createNavItem("Settings", "assets/images/icons/settings.png", "settings.php");
             $menuHtml .= $this->createNavItem("Log Out", "assets/images/icons/logout.png", "logout.php");

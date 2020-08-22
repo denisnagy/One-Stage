@@ -49,10 +49,6 @@ $userLoggedInObj = new User($con, $usernameLoggedIn);
             </div>
 
             <div class="rightMenu">
-                <a href="upload.php">
-                    <img class="upload" src="assets/images/icons/upload.png" alt="">
-                </a>
-
                 <?php
                     echo ButtonProvider::createUserProfileNavigationButton($con, $userLoggedInObj->getUsername());
                 ?>

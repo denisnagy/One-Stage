@@ -30,6 +30,10 @@ class User {
         return $this->sqlData["firstName"];
     }
 
+    public function getLastName() {
+        return $this->sqlData["lastName"];
+    }
+
     public function getEmail() {
         return $this->sqlData["email"];
     }
